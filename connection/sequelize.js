@@ -4,6 +4,8 @@ const RoomModel = require('./sqlite/room')
 const OrderModel = require('./sqlite/order')
 const OrderDetailModel = require('./sqlite/order_detail')
 
+const ManagerModel = require('./sqlite/manager')
+
 const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: 'database.sqlite',
@@ -16,13 +18,13 @@ const sequelize = new Sequelize({
     transactionType: 'IMMEDIATE',
     logging: false
 });
+const Op = Sequelize.Op
 
+// Customer
 const Customer = CustomerModel(sequelize, Sequelize)
 const Room = RoomModel(sequelize, Sequelize)
 const Order = OrderModel(sequelize, Sequelize)
 const OrderDetail = OrderDetailModel(sequelize, Sequelize)
-
-const Op = Sequelize.Op
 
 Customer.hasMany(Order);
 Order.belongsTo(Customer);
@@ -32,6 +34,11 @@ OrderDetail.belongsTo(Order);
 
 Room.hasMany(OrderDetail);
 OrderDetail.belongsTo(Room);
+
+
+// Admin
+const Manager = ManagerModel(sequelize, Sequelize)
+
 
 sequelize.sync({ force: false })
 .then(() => {
@@ -44,5 +51,6 @@ module.exports = {
     Room,
     Order,
     OrderDetail,
+    Manager,
     Op
 }

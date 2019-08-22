@@ -1,53 +1,38 @@
 let express = require('express')
 let { Customer } = require('../../connection/sequelize')
-let _ = require('lodash');
+let customerService = require('../../service/customer/accountService')
 
 let router = express.Router()
 let routes = function () {
 
     router.route('/')
     .get(async (req, res) => {
-        let customers = null
-
-        if (req.query.id)
-        {
-            customers = await Customer.findAll(
-                {
-                    where: {
-                        id: req.query.id
-                    }
-                }
-            )
-        } else {
-            customers = await Customer.findAll()
-        }
-
-        return res.status(200).json({
-            data: customers,
-            statusCode: 200,
-            message: 'Get Succeed'
-        });
+        let customer = await customerService.read()
+        return res.status(200).json(customer);
     });
 
     router.route('/')
     .post(async (req, res) => {
-        let customers = await Customer.create(req.body).catch(err => {return err})
+        let customer = await customerService.create(req.body)
+        return res.status(200).json(customer);
+    });
 
-        if (customers.dataValues)
-        {
-            return res.status(200).json({
-                data: customers,
-                statusCode: 200,
-                message: 'Created'
-            });
-        } else {
-            return res.status(200).json({
-                data: customers,
-                statusCode: 100,
-                message: 'Error'
-            });
-        }
-        
+    router.route('/')
+    .put(async (req, res) => {
+        let customer = await customerService.update(req.body)
+        return res.status(200).json(customer);
+    });
+
+    router.route('/')
+    .delete(async (req, res) => {
+        let customer = await customerService.del(req.body)
+        return res.status(200).json(customer);
+    });
+
+    router.route('/login')
+    .post(async (req, res) => {
+        let customer = await customerService.login(req.body)
+        return res.status(200).json(customer);
     });
 
     return router;

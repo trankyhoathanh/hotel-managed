@@ -1,4 +1,4 @@
-let { sequelize, Room, Customer, Order, OrderDetail, Op } = require('../connection/sequelize')
+let { sequelize, Room, Customer, Order, OrderDetail, Op } = require('../../connection/sequelize')
 let roomService = require('./roomService')
 
 ///////////////////////////

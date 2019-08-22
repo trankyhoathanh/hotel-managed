@@ -1,6 +1,6 @@
 let express = require('express')
 let { Customer, Order, OrderDetail } = require('../../connection/sequelize')
-let bookingService = require('../../service/bookingService')
+let bookingService = require('../../service/customer/bookingService')
 let _ = require('lodash');
 
 let router = express.Router()
