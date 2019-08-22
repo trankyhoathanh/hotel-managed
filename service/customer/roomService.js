@@ -1,4 +1,109 @@
-let { sequelize, Room, Customer, Order, OrderDetail, Op } = require('../../connection/sequelize')
+let { Room, Order, OrderDetail, Op } = require('../../connection/sequelize')
+
+async function read() {
+    let room = await Room.findAll()
+    return {
+        data: room,
+        statusCode: 200,
+        message: 'List'
+    }
+}
+
+async function create(data) {
+    let room = await Room.create(data)
+    return {
+        data: room,
+        statusCode: 200,
+        message: 'Create succeed'
+    }
+}
+
+async function update(data) {
+    let room = await Room.update(
+        data,
+        {
+            where: { id: data.id } 
+        }
+    )
+
+    if (!room)
+    {
+        return {
+            data: null,
+            statusCode: 100,
+            message: 'Update failed'
+        }
+    } else {
+        return {
+            data: room,
+            statusCode: 200,
+            message: 'Update succeed'
+        }
+    }
+}
+
+async function del(data) {
+    let room = await Room.update(
+        {
+            isActive: false,
+            isDelete: true
+        },
+        {
+            where: { id: data.id } 
+        }
+    )
+
+    if (!room)
+    {
+        return {
+            data: null,
+            statusCode: 100,
+            message: 'Delete failed'
+        }
+    } else {
+        return {
+            data: room,
+            statusCode: 200,
+            message: 'Delete succeed'
+        }
+    }
+}
+
+///////////////////////////
+//  Get list room Available
+//
+async function roomsAvailable(input) {
+    let rooms = null
+    let roomChoosedId = await roomBookedByDate(
+        input.dateFrom ? input.dateFrom : null,
+        input.dateTo ? input.dateTo : null)
+
+    if (input.id)
+    {
+        rooms = await Room.findAll(
+            {
+                where: {
+                    id: input.id,
+                    isActive: true,
+                    isDelete: false
+                }
+            }
+        )
+    } else {
+        rooms = await Room.findAll(
+            {
+                where: {
+                    id: {
+                        [Op.notIn]: roomChoosedId
+                    },
+                    isActive: true,
+                    isDelete: false
+                }
+            }
+        )
+    }
+    return rooms
+}
 
 ///////////////////////////
 //  Get list room Booked
@@ -49,9 +154,20 @@ async function roomIdBookedByDate(id, date) {
 //  Get list room Booked
 //  Input : date
 //  Output : [id, id, id ...]
-async function roomBookedByDate(date) {
-    let startOfDate = new Date(date).setHours(0,0,0,0)
-    let endOfDate = new Date(date).setHours(23,59,59,999)
+async function roomBookedByDate(dateFrom, dateTo) {
+
+    if (!dateFrom)
+    {
+        return []
+    }
+
+    let startOfDate = new Date(dateFrom).setHours(0,0,0,0)
+    let endOfDate = new Date(dateFrom).setHours(23,59,59,999)
+
+    if (dateTo)
+    {
+        endOfDate = new Date(dateTo).setHours(23,59,59,999)
+    }
 
     let roomChoosed = await Room.findAll(
         {
@@ -60,10 +176,22 @@ async function roomBookedByDate(date) {
                 {
                     attributes:[],
                     model: OrderDetail,
+                    include: [
+                        { 
+                            attributes:[],
+                            model: Order,
+                            where: {
+                                isActive: true,
+                                isDelete: false
+                            }
+                        },
+                    ],
                     where: {
                         startDate: {
                             [Op.between]: [startOfDate, endOfDate]
-                        }
+                        },
+                        isActive: true,
+                        isDelete: false
                     }
                 }
             ]
@@ -78,6 +206,8 @@ async function roomBookedByDate(date) {
 }
 
 module.exports = {
+    read, create, update, del,
+    roomsAvailable,
     roomIdBookedByDate,
     roomBookedByDate
 }

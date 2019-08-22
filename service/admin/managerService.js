@@ -111,12 +111,16 @@ async function login(data) {
 
 async function validateToken(req, res, next) {
     try {
-        let checkToken = await jwtService.jwtSignin(req.headers['authorization'])
+        let checkToken = await jwtService.jwtVerify(req.headers['authorization'])
 
-        if (!checkToken)
+        if (!checkToken || 
+            (
+                checkToken
+                && checkToken.status === false
+            ))
         {
             return res.status(200).json({
-                data: req.headers['authorization'],
+                data: checkToken,
                 statusCode: 100,
                 message: 'Authorization Invalid'
             })

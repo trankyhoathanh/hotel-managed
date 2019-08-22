@@ -35,7 +35,10 @@ let accountService = require('./service/customer/accountService')
 //  Structure CONTROLLERS for ADMIN
 //  START
 let adminRoomController = require('./Controller/admin/roomController')();
-app.use("/admin/room", adminRoomController);
+app.use("/admin/room", managerService.validateToken, adminRoomController);
+
+let adminUnAuthenController = require('./Controller/admin/managerUnAuthenController')();
+app.use("/admin/manager/unauthen", adminUnAuthenController);
 
 let adminManagerController = require('./Controller/admin/managerController')();
 app.use("/admin/manager", managerService.validateToken, adminManagerController);
@@ -52,6 +55,9 @@ app.use("/admin/manager", managerService.validateToken, adminManagerController);
 //
 let customerAccountController = require('./Controller/customer/accountController')();
 app.use("/customer/account", customerAccountController);
+
+let customerRoomUnAuthenController = require('./Controller/customer/roomUnAuthenController')();
+app.use("/customer/room/unauthen", customerRoomUnAuthenController);
 
 let customerRoomController = require('./Controller/customer/roomController')();
 app.use("/customer/room", accountService.validateToken, customerRoomController);

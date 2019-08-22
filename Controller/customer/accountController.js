@@ -1,5 +1,4 @@
 let express = require('express')
-let { Customer } = require('../../connection/sequelize')
 let customerService = require('../../service/customer/accountService')
 
 let router = express.Router()

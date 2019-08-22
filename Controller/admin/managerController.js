@@ -35,12 +35,6 @@ let routes = function () {
         return res.status(200).json(manager);
     });
 
-    router.route('/login')
-    .post(async (req, res) => {
-        let manager = await managerService.login(req.body)
-        return res.status(200).json(manager);
-    });
-
     return router;
 };
 module.exports = routes;

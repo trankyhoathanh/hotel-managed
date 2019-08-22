@@ -11,8 +11,8 @@ const   i = 'Hotel Booking V2',
             issuer: i,
             subject: s,
             audience: a,
-            expiresIn: "12h",
-            algorithm: "RS256"
+            expiresIn: '3h',
+            algorithm: 'RS256'
         }
 
 // ====================   JWT Signin  =====================
@@ -24,20 +24,26 @@ async function jwtSignin(data) {
     return jwt.sign(payload, privateKEY, options)
 }
 
-
 // ====================   JWT Verify ======================
 async function jwtVerify(token) {
     try {
-        return jwt.verify(token, publicKEY, options)
+        let data = await jwt.verify(token, publicKEY, options)
+        return {
+            data: data,
+            status: true
+        }
     } catch (err) {
-        return false;
+        return {
+            data: err,
+            status: false
+        }
     }
 }
 
 // ====================   JWT DeCode ======================
 async function jwtDecode(token) {
     return jwt.decode(token, {complete: true});
- }
+}
 
 module.exports = {
     jwtSignin,
