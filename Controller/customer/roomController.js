@@ -20,12 +20,6 @@ let routes = function () {
         });
     });
 
-    router.route('/')
-    .post(async (req, res) => {
-        let room = await roomService.create(req.body)
-        return res.status(200).json(room);
-    });
-
     return router;
 };
 module.exports = routes;

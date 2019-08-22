@@ -1,4 +1,4 @@
-let { sequelize, Room, Customer, Order, OrderDetail, Op } = require('../../connection/sequelize')
+let { sequelize, Room, Customer, Order, OrderDetail, Op, logger } = require('../../connection/sequelize')
 let roomService = require('./roomService')
 
 async function getAllBooking(body) {
@@ -47,6 +47,15 @@ async function getAllBooking(body) {
             }
         )
     }
+
+    // logger.log('info',`Get list booking`, {
+    //     logDate: new Date(),
+    //     type: 'BOOKING',
+    //     from: 'CUSTOMER',
+    //     userId: body.customerId,
+    //     data: order
+    // })
+    
     return {
         data: order,
         status: 200,
@@ -127,9 +136,22 @@ async function bookRoom(body) {
                 message: `Error, can't save some order details`
             }
         }
-        
         // commit
         await transaction.commit();
+
+        for(let i = 0; i < orderDetails.length; i++)
+        {
+            logger.log('info',`Room Add`, {
+                logDate: new Date(),
+                type: 'ROOM',
+                action: 'ADD',
+                from: 'CUSTOMER',
+                roomId: orderDetails[i].id,
+                userId: body.customerId,
+                data: orderDetails[i]
+            })
+        }
+        
       
         let booking = await Order.findAll({
             where: {
@@ -282,6 +304,49 @@ async function updateBookRoom(body) {
         // commit
         await transaction.commit();
 
+
+
+        //////////////////////////////////////////////
+        //  Logger
+        //  START
+        //
+        //  Room Update
+        if (body.order_details)
+        {
+            for(let i = 0, len = body.order_details.length; i < len; i++)
+            {
+                if (body.order_details[i].isDelete)
+                {
+                    logger.log('info',`Room Remove`, {
+                        logDate: new Date(),
+                        type: 'ROOM',
+                        action: 'REMOVE',
+                        from: 'CUSTOMER',
+                        roomId: body.order_details[i].id,
+                        userId: body.customerId,
+                        data: body.order_details[i]
+                    })
+                }
+            }
+        }
+        // Room Add
+        for(let i = 0; i < orderDetails.length; i++)
+        {
+            logger.log('info',`Room Add`, {
+                logDate: new Date(),
+                type: 'ROOM',
+                action: 'ADD',
+                from: 'CUSTOMER',
+                roomId: orderDetails[i].id,
+                userId: body.customerId,
+                data: orderDetails[i]
+            })
+        }
+        //
+        //  END
+        //  Logger
+        //////////////////////////////////////////////
+
         return {
             data: null,
             status: 200,
@@ -331,6 +396,45 @@ async function cancel(body) {
             message: 'Cancel failed'
         }
     } else {
+        order = await Order.findOne(
+            {
+                where: {
+                    customerId: body.customerId,
+                    id: body.id
+                },
+                include: [
+                    {
+                        model: OrderDetail
+                    },
+                ],
+            }
+        )
+
+        //////////////////////////////////////////////
+        //  Logger
+        //  START
+        //
+        //  Room Update
+        if (order && order.order_details)
+        {
+            for(let i = 0, len = order.order_details.length; i < len; i++)
+            {
+                logger.log('info',`Room Remove`, {
+                    logDate: new Date(),
+                    type: 'ROOM',
+                    action: 'REMOVE',
+                    from: 'CUSTOMER',
+                    roomId: order.order_details[i].id,
+                    userId: order.customerId,
+                    data: order.order_details[i]
+                })
+            }
+        }
+        //
+        //  END
+        //  Logger
+        //////////////////////////////////////////////
+
         return {
             data: orderStatus,
             status: 200,

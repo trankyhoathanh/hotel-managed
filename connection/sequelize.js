@@ -45,6 +45,50 @@ sequelize.sync({ force: false })
     console.log(`Database & tables OK`)
 })
 
+let winston = require('winston');
+let optionsWinston = {
+    errorFile: {
+        level: 'error',
+        filename: `${__dirname}/winston_error.log`,
+        handleExceptions: true,
+        json: true,
+        maxsize: 5242880, // 5MB
+        maxFiles: 5,
+        colorize: false,
+    },
+    file: {
+      level: 'info',
+      filename: `${__dirname}/winston_info.log`,
+      handleExceptions: true,
+      json: true,
+      maxsize: 5242880, // 5MB
+      maxFiles: 5,
+      colorize: false,
+    },
+    console: {
+      level: 'debug',
+      handleExceptions: true,
+      json: false,
+      colorize: true,
+    },
+  }
+let logger = new winston.createLogger({
+    transports: [
+        new (winston.transports.Console)(optionsWinston.console),
+        new (winston.transports.File)(optionsWinston.errorFile),
+        new (winston.transports.File)(optionsWinston.file)
+        // new winston.transports.File(optionsWinston.file),
+        // new winston.transports.Console(optionsWinston.console)
+    ],
+    exitOnError: false, // do not exit on handled exceptions
+})
+
+// logger.stream = {
+//     write: function(message, encoding) {
+//       logger.info(message);
+//     },
+// }
+
 module.exports = {
     sequelize,
     Customer,
@@ -52,5 +96,6 @@ module.exports = {
     Order,
     OrderDetail,
     Manager,
-    Op
+    Op,
+    logger
 }

@@ -1,4 +1,4 @@
-let { Room, Order, OrderDetail, Op } = require('../../connection/sequelize')
+let { Room, Order, OrderDetail, Op, logger } = require('../../connection/sequelize')
 
 async function read() {
     let room = await Room.findAll()
@@ -11,6 +11,17 @@ async function read() {
 
 async function create(data) {
     let room = await Room.create(data)
+
+    logger.log('info',`Room CREATE`, {
+        logDate: new Date(),
+        type: 'ROOM',
+        action: 'CREATE',
+        from: 'ADMINISTRATOR',
+        roomId: room.id,
+        userId: '',
+        data: room
+    })
+
     return {
         data: room,
         statusCode: 200,
@@ -34,6 +45,17 @@ async function update(data) {
             message: 'Update failed'
         }
     } else {
+
+        logger.log('info',`Room UPDATE`, {
+            logDate: new Date(),
+            type: 'ROOM',
+            action: 'UPDATE',
+            from: 'ADMINISTRATOR',
+            roomId: room.id,
+            userId: '',
+            data: room
+        })
+
         return {
             data: room,
             statusCode: 200,
@@ -61,6 +83,17 @@ async function del(data) {
             message: 'Delete failed'
         }
     } else {
+
+        logger.log('info',`Room DELETE`, {
+            logDate: new Date(),
+            type: 'ROOM',
+            action: 'DELETE',
+            from: 'ADMINISTRATOR',
+            roomId: room.id,
+            userId: '',
+            data: room
+        })
+
         return {
             data: room,
             statusCode: 200,

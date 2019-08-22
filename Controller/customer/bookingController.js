@@ -13,6 +13,7 @@ let routes = function () {
         body.customerId = userId
 
         let order = await bookingService.getAllBooking(body)
+
         return res.status(200).json(order);
     });
 
@@ -50,6 +51,11 @@ let routes = function () {
     // { "id": "dbc8d12d-bf84-4de8-a277-f4bd07ac87bf" }
     router.route('/cancel')
     .post(async (req, res) => {
+        // Get UserId from token
+        let userId = await jwtService.getUserId(req.headers['authorization'])
+        let body = req.body
+        body.customerId = userId
+        
         let cancel = await bookingService.cancel(req.body)
         return res.status(200).json(cancel);
     });
