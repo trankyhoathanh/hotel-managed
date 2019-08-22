@@ -1,12 +1,18 @@
 let express = require('express')
 let bookingService = require('../../service/customer/bookingService')
+let jwtService = require('../../service/general/jwtService')
 
 let router = express.Router()
 let routes = function () {
 
     router.route('/')
     .get(async (req, res) => {
-        let order = bookingService.getAllBooking(req.body)
+        // Get UserId from token
+        let userId = await jwtService.getUserId(req.headers['authorization'])
+        let body = req.body
+        body.customerId = userId
+
+        let order = await bookingService.getAllBooking(body)
         return res.status(200).json(order);
     });
 
@@ -17,7 +23,24 @@ let routes = function () {
     router.route('/')
     .post(async (req, res) => {
 
-        let booking = await bookingService.bookRoom(req.body)
+        // Get UserId from token
+        let userId = await jwtService.getUserId(req.headers['authorization'])
+        let body = req.body
+        body.customerId = userId
+
+        let booking = await bookingService.bookRoom(body)
+        return res.status(200).json(booking);
+    });
+
+    router.route('/')
+    .put(async (req, res) => {
+
+        // Get UserId from token
+        let userId = await jwtService.getUserId(req.headers['authorization'])
+        let body = req.body
+        body.customerId = userId
+
+        let booking = await bookingService.updateBookRoom(body)
         return res.status(200).json(booking);
     });
 

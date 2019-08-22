@@ -13,6 +13,26 @@ async function getAllBooking(body) {
                 }
             }
         )
+    } else if (body.customerId) {
+        order = await Order.findAll(
+            {
+                where: {
+                    customerId: body.customerId,
+                    isActive: true,
+                    isDelete: false
+                },
+                include: [
+                    { 
+                        //attributes:[],
+                        model: OrderDetail,
+                        where: {
+                            isActive: true,
+                            isDelete: false
+                        }
+                    },
+                ],
+            }
+        )
     } else {
         order = await Order.findAll(
             {
@@ -151,6 +171,144 @@ async function bookRoom(body) {
 }
 
 ///////////////////////////
+//  Update booking room Multi rooms
+async function updateBookRoom(body) {
+
+    // Check start date
+    if (body.order_details)
+    {
+        for(let i = 0, len = body.order_details.length; i < len; i++)
+        {
+            let item = await OrderDetail.findOne({
+                    where: { id: body.order_details[i].id } 
+                }
+            )
+            if (item.startDate <= new Date())
+            {
+                return {
+                    data: null,
+                    status: 100,
+                    message: `You can't update order booking, start date is lower current date !`
+                }
+            }
+            
+        }
+    }
+
+    let transaction
+    try {
+        // get transaction
+        transaction = await sequelize.transaction()
+
+        // step 1 - Update Order
+        let order = await Order.findOne({
+            where: {
+                id: body.id
+            }
+        })
+
+        await order.update(
+            {
+                isActive: body.isActive,
+                isDelete: body.isDelete 
+            }, { transaction }
+        )
+
+
+        // step 2 - Update details
+        if (body.order_details)
+        {
+            for(let i = 0, len = body.order_details.length; i < len; i++)
+            {
+                let item = await OrderDetail.findOne({
+                        where: { id: body.order_details[i].id } 
+                    }
+                )
+                await item.update({
+                    isActive: body.order_details[i].isActive,
+                    isDelete: body.order_details[i].isDelete 
+                }, { transaction })
+            }
+        }
+
+        // step 3 - Insert Order Details
+        let orderDetails = []
+        let roomConflicts = []
+        if (body.roomIds && body.roomIds.length > 0)
+        {
+            for(let i = 0, len = body.roomIds.length; i < len; i++)
+            {
+                // Check room Conflict
+                let roomChoosedId = await roomService.roomIdBookedByDate(body.roomIds[i].id, body.roomIds[i].date)
+                let roomConflict = await Room.findAll(
+                    {
+                        where: {
+                            id: {
+                                [Op.in]: roomChoosedId
+                            }
+                        }
+                    }
+                )
+
+                if (roomConflict && roomConflict.length > 0)
+                {
+                    roomConflicts.push(roomConflict)
+                }
+
+                let detail = await OrderDetail.create(
+                    {
+                        orderId: order.id,
+                        roomId: body.roomIds[i].id,
+                        startDate: new Date(body.roomIds[i].date)
+                    },
+                    {transaction}
+                );
+                orderDetails.push(detail)
+            }
+        }
+
+        if (roomConflicts && roomConflicts.length > 0)
+        {
+            await transaction.rollback()
+            return {
+                data: {
+                    roomConflicts : roomConflicts
+                },
+                status: 100,
+                message: 'Any rooms is not available today'
+            }
+        }
+
+        // commit
+        await transaction.commit();
+
+        return {
+            data: null,
+            status: 200,
+            message: 'Commit Succeed'
+        }
+    } catch (err) {
+        if (!transaction)
+        {
+            return {
+                data: err,
+                status: 100,
+                message: 'Error have not transaction'
+            }
+        }
+        if (err) {
+            await transaction.rollback()
+            return {
+                data: err,
+                status: 100,
+                message: 'Error, rollback succeed'
+            }
+        }
+    }
+
+}
+
+///////////////////////////
 //  Cancel ORDER booking
 //  Input : id (order booking id)
 //  Output : {data, status, message}
@@ -184,5 +342,6 @@ async function cancel(body) {
 module.exports = {
     getAllBooking,
     bookRoom,
+    updateBookRoom,
     cancel
 }

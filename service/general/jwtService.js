@@ -45,7 +45,20 @@ async function jwtDecode(token) {
     return jwt.decode(token, {complete: true});
 }
 
+// ====================   Get UserId ======================
+async function getUserId(token) {
+    let decoded = await jwtDecode(token)
+    let userId = ''
+    if (decoded && decoded.payload && decoded.payload.data && decoded.payload.data.id)
+    {
+        userId = decoded.payload.data.id
+    }
+    
+    return userId
+}
+
 module.exports = {
+    getUserId,
     jwtSignin,
     jwtVerify,
     jwtDecode
