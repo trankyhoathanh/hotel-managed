@@ -1,6 +1,39 @@
 let { sequelize, Room, Customer, Order, OrderDetail, Op } = require('../../connection/sequelize')
 let roomService = require('./roomService')
 
+async function getAllBooking(body) {
+    let order = null
+
+    if (body.id)
+    {
+        order = await Order.findAll(
+            {
+                where: {
+                    id: body.id
+                }
+            }
+        )
+    } else {
+        order = await Order.findAll(
+            {
+                include: [
+                    {
+                        model: OrderDetail
+                    },
+                    {
+                        model: Customer
+                    }
+                ]
+            }
+        )
+    }
+    return {
+        data: order,
+        status: 200,
+        message: 'All Booking'
+    }
+}
+
 ///////////////////////////
 //  Booking room Multi rooms
 //  Input : customerId, roomIds [ { id, date (2019-08-21) }, {}, ... ]
@@ -149,6 +182,7 @@ async function cancel(body) {
 }
 
 module.exports = {
+    getAllBooking,
     bookRoom,
     cancel
 }

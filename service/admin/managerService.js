@@ -1,5 +1,5 @@
 let md5 = require('md5');
-let { Manager, Op } = require('../../connection/sequelize')
+let { Manager } = require('../../connection/sequelize')
 let jwtService = require('../../service/general/jwtService')
 
 ///////////////////////////

@@ -1,44 +1,13 @@
 let express = require('express')
-let { Customer, Order, OrderDetail } = require('../../connection/sequelize')
 let bookingService = require('../../service/customer/bookingService')
-let _ = require('lodash');
 
 let router = express.Router()
 let routes = function () {
 
     router.route('/')
     .get(async (req, res) => {
-        let order = null
-
-        if (req.query.id)
-        {
-            order = await Order.findAll(
-                {
-                    where: {
-                        id: req.query.id
-                    }
-                }
-            )
-        } else {
-            order = await Order.findAll(
-                {
-                    include: [
-                        {
-                            model: OrderDetail
-                        },
-                        {
-                            model: Customer
-                        }
-                    ]
-                }
-            )
-        }
-
-        return res.status(200).json({
-            data: order,
-            statusCode: 200,
-            message: 'Get Succeed'
-        });
+        let order = bookingService.getAllBooking(req.body)
+        return res.status(200).json(order);
     });
 
     /////////////////////////////////

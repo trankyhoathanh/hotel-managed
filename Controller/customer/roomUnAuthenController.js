@@ -1,7 +1,5 @@
 let express = require('express')
-let { Room, Op } = require('../../connection/sequelize')
 let roomService = require('../../service/customer/roomService')
-let _ = require('lodash');
 
 let router = express.Router()
 let routes = function () {
