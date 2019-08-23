@@ -1,5 +1,6 @@
 const express = require('express')
 const customerService = require('../../service/customer/accountService')
+const { check, validationResult } = require('express-validator')
 
 let router = express.Router()
 let routes = function () {
@@ -11,7 +12,26 @@ let routes = function () {
     })
 
     router.route('/')
-    .post(async (req, res) => {
+    .post(
+    [
+        check('user', `Username is not valid`).not().isEmpty(),
+        check('pass', `Password is not valid`).not().isEmpty()
+    ],
+    async (req, res) => {
+        // validate model
+        let errors = await validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(200).json(
+                { 
+                    data: {
+                        err: errors.array()
+                    },
+                    statusCode: 100,
+                    message: 'Validate input'
+                }
+            )
+        }
+        
         let customer = await customerService.create(req.body)
         return res.status(200).json(customer)
     })
@@ -25,12 +45,6 @@ let routes = function () {
     router.route('/')
     .delete(async (req, res) => {
         let customer = await customerService.del(req.body)
-        return res.status(200).json(customer)
-    })
-
-    router.route('/login')
-    .post(async (req, res) => {
-        let customer = await customerService.login(req.body)
         return res.status(200).json(customer)
     })
 

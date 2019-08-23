@@ -1,6 +1,7 @@
 const express = require('express')
 const bookingService = require('../../service/customer/bookingService')
 const jwtService = require('../../service/general/jwtService')
+const { check, validationResult } = require('express-validator')
 
 const expressQueue = require('express-queue')
 const queueMw = expressQueue({ activeLimit: 20, queuedLimit: 20 });
@@ -26,7 +27,7 @@ let routes = function () {
     router.route('/')
     .post(
     queueMw,
-    async (req, res) => {
+    async(req, res) => {
 
         // Get UserId from token
         let userId = await jwtService.getUserId(req.headers['authorization'])
