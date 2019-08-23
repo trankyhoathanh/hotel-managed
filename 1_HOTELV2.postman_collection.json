@@ -1,0 +1,706 @@
+{
+	"info": {
+		"_postman_id": "029ef0f1-614b-4f7d-915f-db6c3481d09e",
+		"name": "1_HOTELV2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "administrator",
+			"item": [
+				{
+					"name": "login",
+					"item": [
+						{
+							"name": "admin/manager/createprivate",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\": \"child1\",\n    \"pass\": \"child1\"\n}"
+								},
+								"url": {
+									"raw": "localhost:30004/admin/manager/unauthen/createprivate",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"admin",
+										"manager",
+										"unauthen",
+										"createprivate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "admin/manager/login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\": \"child1\",\n    \"pass\": \"child1\"\n}"
+								},
+								"url": {
+									"raw": "localhost:30004/admin/manager/unauthen/login",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"admin",
+										"manager",
+										"unauthen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "room",
+					"item": [
+						{
+							"name": "admin/room",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiN2ZkYTk4MGQtOTY2My00YjMwLWEzZjgtNTNmZmU0MmU5MGU1IiwidXNlclR5cGUiOiJhZG1pbiJ9LCJpYXQiOjE1NjY1MTk2OTQsImV4cCI6MTU2NjUzMDQ5NCwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.OMxbHk8j-lDZNynFvSfwp_hFbOjLB-RrII6tgpXe4QIxWCjJeL_y5ubk50513Erc6zYbJnYSU4fxJ3hXfHbpng",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:30004/admin/room",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"admin",
+										"room"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "admin/room",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiN2ZkYTk4MGQtOTY2My00YjMwLWEzZjgtNTNmZmU0MmU5MGU1IiwidXNlclR5cGUiOiJhZG1pbiJ9LCJpYXQiOjE1NjY1MTk2OTQsImV4cCI6MTU2NjUzMDQ5NCwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.OMxbHk8j-lDZNynFvSfwp_hFbOjLB-RrII6tgpXe4QIxWCjJeL_y5ubk50513Erc6zYbJnYSU4fxJ3hXfHbpng",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": \"cao cấp 4\",\n    \"description\": \"Khu du lịch sinh thái Thanh Đa\",\n    \"image\": \"\",\n    \"quantity\": 55,\n    \"price\": 3333\n}"
+								},
+								"url": {
+									"raw": "localhost:30004/admin/room",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"admin",
+										"room"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "admin/room",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiN2ZkYTk4MGQtOTY2My00YjMwLWEzZjgtNTNmZmU0MmU5MGU1IiwidXNlclR5cGUiOiJhZG1pbiJ9LCJpYXQiOjE1NjY1MTk2OTQsImV4cCI6MTU2NjUzMDQ5NCwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.OMxbHk8j-lDZNynFvSfwp_hFbOjLB-RrII6tgpXe4QIxWCjJeL_y5ubk50513Erc6zYbJnYSU4fxJ3hXfHbpng",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"54f79336-dac6-4926-bbcf-7d4bcc58a814\",\n    \"type\": \"cao cấp 4\",\n    \"description\": \"Khu du lịch sinh thái Thanh Đa\",\n    \"image\": \"\",\n    \"quantity\": 55,\n    \"price\": 3334,\n    \"isActive\": true,\n    \"isDelete\": false,\n    \"createdAt\": \"2019-08-23T00:23:06.055Z\",\n    \"updatedAt\": \"2019-08-23T00:23:06.055Z\"\n}"
+								},
+								"url": {
+									"raw": "localhost:30004/admin/room",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"admin",
+										"room"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "admin/room",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiN2ZkYTk4MGQtOTY2My00YjMwLWEzZjgtNTNmZmU0MmU5MGU1IiwidXNlclR5cGUiOiJhZG1pbiJ9LCJpYXQiOjE1NjY1MTk2OTQsImV4cCI6MTU2NjUzMDQ5NCwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.OMxbHk8j-lDZNynFvSfwp_hFbOjLB-RrII6tgpXe4QIxWCjJeL_y5ubk50513Erc6zYbJnYSU4fxJ3hXfHbpng",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"54f79336-dac6-4926-bbcf-7d4bcc58a814\"\n}"
+								},
+								"url": {
+									"raw": "localhost:30004/admin/room",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"admin",
+										"room"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "manager",
+					"item": [
+						{
+							"name": "admin/manager",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiN2ZkYTk4MGQtOTY2My00YjMwLWEzZjgtNTNmZmU0MmU5MGU1IiwidXNlclR5cGUiOiJhZG1pbiJ9LCJpYXQiOjE1NjY1MTk2OTQsImV4cCI6MTU2NjUzMDQ5NCwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.OMxbHk8j-lDZNynFvSfwp_hFbOjLB-RrII6tgpXe4QIxWCjJeL_y5ubk50513Erc6zYbJnYSU4fxJ3hXfHbpng",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:30004/admin/manager",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"admin",
+										"manager"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "admin/manager",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiN2ZkYTk4MGQtOTY2My00YjMwLWEzZjgtNTNmZmU0MmU5MGU1IiwidXNlclR5cGUiOiJhZG1pbiJ9LCJpYXQiOjE1NjY1MTk2OTQsImV4cCI6MTU2NjUzMDQ5NCwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.OMxbHk8j-lDZNynFvSfwp_hFbOjLB-RrII6tgpXe4QIxWCjJeL_y5ubk50513Erc6zYbJnYSU4fxJ3hXfHbpng",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\": \"child2\",\n    \"pass\": \"child2\"\n}"
+								},
+								"url": {
+									"raw": "localhost:30004/admin/manager",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"admin",
+										"manager"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "admin/manager",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"e87a57f4-05a3-4539-8242-4d94a9dc8d27\",\n    \"user\": \"child1\",\n    \"pass\": \"27cfbe367a1294dc60aef746fb69e797\",\n    \"canDelete\": true,\n    \"isActive\": true,\n    \"isDelete\": false,\n    \"createdAt\": \"2019-08-21T23:21:37.488Z\",\n    \"updatedAt\": \"2019-08-21T23:21:37.488Z\"\n}"
+								},
+								"url": {
+									"raw": "localhost:30004/admin/manager",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"admin",
+										"manager"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "admin/manager",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiN2ZkYTk4MGQtOTY2My00YjMwLWEzZjgtNTNmZmU0MmU5MGU1IiwidXNlclR5cGUiOiJhZG1pbiJ9LCJpYXQiOjE1NjY1MTk2OTQsImV4cCI6MTU2NjUzMDQ5NCwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.OMxbHk8j-lDZNynFvSfwp_hFbOjLB-RrII6tgpXe4QIxWCjJeL_y5ubk50513Erc6zYbJnYSU4fxJ3hXfHbpng",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"f7f90a8a-9b4d-4fb1-a39c-2821ff1983da\"\n}"
+								},
+								"url": {
+									"raw": "localhost:30004/admin/manager",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"admin",
+										"manager"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "customer",
+			"item": [
+				{
+					"name": "login",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"user\": \"thanh2\",\n\t\"pass\": \"123456\"\n}"
+								},
+								"url": {
+									"raw": "localhost:30004/customer/account/unauthen/register",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"customer",
+										"account",
+										"unauthen",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"user\": \"\",\n\t\"pass\": \"123\"\n}"
+								},
+								"url": {
+									"raw": "localhost:30004/customer/account/unauthen/login",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"customer",
+										"account",
+										"unauthen",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "room",
+					"item": [
+						{
+							"name": "room-unauthen",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiYjUyMjcxZWItZDYwYi00MzNiLWI5M2MtMWQ1MDE2MzFhYzE4IiwidXNlclR5cGUiOiJjdXN0b21lciJ9LCJpYXQiOjE1NjY0NTc3OTAsImV4cCI6MTU2NjQ1NzgwMCwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.DcHIHLnvI8Cip93lMLojjSOO25v7OfZvYPNOKnWZhInAn8gzArFPheoiNlM-BJoQG9bBCOTPk5kUHA59I550uQ",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:30004/customer/room/unauthen?dateFrom=2019-08-25&dateTo=2019-08-25",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"customer",
+										"room",
+										"unauthen"
+									],
+									"query": [
+										{
+											"key": "dateFrom",
+											"value": "2019-08-25"
+										},
+										{
+											"key": "dateTo",
+											"value": "2019-08-25"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "room",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNmUwNzQ5NzYtZjI0ZC00OGY3LTliMzMtZmQxZDc1YzhmZjQ2IiwidXNlclR5cGUiOiJjdXN0b21lciJ9LCJpYXQiOjE1NjY1MjA3NDUsImV4cCI6MTU2NjUzMTU0NSwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.L_WSSsBMZpn4CBKpqvNOuwvgsTtaKPN-tNsllLc0f5DqP1XCUqxtQkRgD9WlIC7jXuGAqC9YUoldJEGwYQhJ-Q"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:30004/customer/room?dateFrom=2019-08-21&dateTo=2019-08-21",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"customer",
+										"room"
+									],
+									"query": [
+										{
+											"key": "dateFrom",
+											"value": "2019-08-21"
+										},
+										{
+											"key": "dateTo",
+											"value": "2019-08-21"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "booking",
+					"item": [
+						{
+							"name": "booking",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNmUwNzQ5NzYtZjI0ZC00OGY3LTliMzMtZmQxZDc1YzhmZjQ2IiwidXNlclR5cGUiOiJjdXN0b21lciJ9LCJpYXQiOjE1NjY1MjA3NDUsImV4cCI6MTU2NjUzMTU0NSwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.L_WSSsBMZpn4CBKpqvNOuwvgsTtaKPN-tNsllLc0f5DqP1XCUqxtQkRgD9WlIC7jXuGAqC9YUoldJEGwYQhJ-Q",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:30004/customer/booking",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"customer",
+										"booking"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "booking",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNmUwNzQ5NzYtZjI0ZC00OGY3LTliMzMtZmQxZDc1YzhmZjQ2IiwidXNlclR5cGUiOiJjdXN0b21lciJ9LCJpYXQiOjE1NjY1MjA3NDUsImV4cCI6MTU2NjUzMTU0NSwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.L_WSSsBMZpn4CBKpqvNOuwvgsTtaKPN-tNsllLc0f5DqP1XCUqxtQkRgD9WlIC7jXuGAqC9YUoldJEGwYQhJ-Q",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"roomIds\": [\n\t\t{\n\t\t\t\"id\": \"f0685398-6e1c-48d8-821a-3d16371066f0\",\n\t\t\t\"date\": \"2019-08-25\"\n\t\t},\n\t\t{\n\t\t\t\"id\": \"8afb548a-e1d0-4e6b-bba6-53e01ba52695\",\n\t\t\t\"date\": \"2019-08-25\"\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "localhost:30004/customer/booking",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"customer",
+										"booking"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "booking",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNmUwNzQ5NzYtZjI0ZC00OGY3LTliMzMtZmQxZDc1YzhmZjQ2IiwidXNlclR5cGUiOiJjdXN0b21lciJ9LCJpYXQiOjE1NjY1MjA3NDUsImV4cCI6MTU2NjUzMTU0NSwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.L_WSSsBMZpn4CBKpqvNOuwvgsTtaKPN-tNsllLc0f5DqP1XCUqxtQkRgD9WlIC7jXuGAqC9YUoldJEGwYQhJ-Q",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n            \"id\": \"ee40c00f-8ad4-4151-a089-1ecbd76d74a9\",\n            \"startDate\": \"2019-08-23 01:10:29\",\n            \"isActive\": true,\n            \"isDelete\": false,\n            \"createdAt\": \"2019-08-23T01:10:29.809Z\",\n            \"updatedAt\": \"2019-08-23T01:10:29.809Z\",\n            \"customerId\": \"6e074976-f24d-48f7-9b33-fd1d75c8ff46\",\n            \"order_details\": [\n                {\n                    \"id\": \"322c9f2a-fd4c-4431-addd-673af20c2ca1\",\n                    \"startDate\": 1566691200000,\n                    \"isActive\": false,\n                    \"isDelete\": true,\n                    \"createdAt\": \"2019-08-23T01:10:29.827Z\",\n                    \"updatedAt\": \"2019-08-23T01:10:29.827Z\",\n                    \"orderId\": \"ee40c00f-8ad4-4151-a089-1ecbd76d74a9\",\n                    \"roomId\": \"f0685398-6e1c-48d8-821a-3d16371066f0\"\n                },\n                {\n                    \"id\": \"8e826982-8fe1-4b70-b4d0-656816db9dc1\",\n                    \"startDate\": 1566691200000,\n                    \"isActive\": true,\n                    \"isDelete\": false,\n                    \"createdAt\": \"2019-08-23T01:10:29.841Z\",\n                    \"updatedAt\": \"2019-08-23T01:10:29.841Z\",\n                    \"orderId\": \"ee40c00f-8ad4-4151-a089-1ecbd76d74a9\",\n                    \"roomId\": \"8afb548a-e1d0-4e6b-bba6-53e01ba52695\"\n                }\n            ],\n            \"roomIds\": [\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"9cb2e917-b446-4b1b-a84e-60cdc22a3655\",\n\t\t\t\t\t\"date\": \"2019-08-25\"\n\t\t\t\t}\n\t\t\t]\n        }"
+								},
+								"url": {
+									"raw": "localhost:30004/customer/booking",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"customer",
+										"booking"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "booking/cancel",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNmUwNzQ5NzYtZjI0ZC00OGY3LTliMzMtZmQxZDc1YzhmZjQ2IiwidXNlclR5cGUiOiJjdXN0b21lciJ9LCJpYXQiOjE1NjY1MjA3NDUsImV4cCI6MTU2NjUzMTU0NSwiYXVkIjoiaHR0cHM6Ly90cmFua3lob2F0aGFuaC5jb20iLCJpc3MiOiJIb3RlbCBCb29raW5nIFYyIiwic3ViIjoidHJhbmt5aG9hdGhhbmguMTk5MkBnbWFpbC5jb20ifQ.L_WSSsBMZpn4CBKpqvNOuwvgsTtaKPN-tNsllLc0f5DqP1XCUqxtQkRgD9WlIC7jXuGAqC9YUoldJEGwYQhJ-Q",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"id\": \"8450c085-6b2a-4904-b958-373433850e74\" }"
+								},
+								"url": {
+									"raw": "localhost:30004/customer/booking/cancel",
+									"host": [
+										"localhost"
+									],
+									"port": "30004",
+									"path": [
+										"customer",
+										"booking",
+										"cancel"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
