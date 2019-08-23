@@ -75,7 +75,6 @@ app.use("/customer/booking", accountService.validateToken, customerBookingContro
 
 // Run system
 server.listen(port, function() {
-  let datetime = new Date()
-  let message = "Server runnning on Port:- " + port + "\r\nStarted at :- " + datetime
-  console.log(message)
+  console.log(`Server runnning on Port : ${port} \r\nStarted at : ${new Date()}`
+  )
 })

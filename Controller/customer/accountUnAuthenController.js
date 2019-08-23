@@ -2,6 +2,9 @@ const express = require('express')
 const customerService = require('../../service/customer/accountService')
 const { check, validationResult } = require('express-validator')
 
+const expressQueue = require('express-queue')
+const queueMw = expressQueue({ activeLimit: 5, queuedLimit: -1 });
+
 let router = express.Router()
 let routes = function () {
     
@@ -30,6 +33,19 @@ let routes = function () {
         return res.status(200).json(customer)
     })
 
+    router.route('/testqueue')
+    .get(
+    queueMw,
+    async (req, res) => {
+        return res.status(200).json(
+            { 
+                data: '',
+                statusCode: 200,
+                message: '123123'
+            }
+        )
+    })
+
     router.route('/login')
     .post(
     [
@@ -37,7 +53,6 @@ let routes = function () {
         check('pass', `Password is not valid`).not().isEmpty()
     ],
     async (req, res) => {
-        
         // validate model
         let errors = await validationResult(req)
         if (!errors.isEmpty()) {
