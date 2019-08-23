@@ -51,7 +51,7 @@ async function update(data) {
             type: 'ROOM',
             action: 'UPDATE',
             from: 'ADMINISTRATOR',
-            roomId: room.id,
+            roomId: data.id,
             userId: '',
             data: room
         })
@@ -89,7 +89,7 @@ async function del(data) {
             type: 'ROOM',
             action: 'DELETE',
             from: 'ADMINISTRATOR',
-            roomId: room.id,
+            roomId: data.id,
             userId: '',
             data: room
         })
