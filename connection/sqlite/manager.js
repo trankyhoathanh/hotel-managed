@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const Sequelize = require('sequelize')
 module.exports = (sequelize, type) => {
     return sequelize.define('manager', {
       id: {
@@ -8,8 +8,21 @@ module.exports = (sequelize, type) => {
         unique: true,
         primaryKey: true
       },
-      user: type.STRING,
-      pass: type.STRING,
+      user: {
+        type: type.STRING,
+        validate: {
+          notEmpty: true
+        },
+        defaultValue: '',
+        unique: true
+      },
+      pass: {
+        type: type.STRING,
+        validate: {
+          notEmpty: true
+        },
+        defaultValue: ''
+      },
       canDelete: {
         type: type.BOOLEAN,
         defaultValue: true

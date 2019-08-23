@@ -1,6 +1,7 @@
-let express = require('express')
-let bookingService = require('../../service/customer/bookingService')
-let jwtService = require('../../service/general/jwtService')
+const express = require('express')
+const bookingService = require('../../service/customer/bookingService')
+const jwtService = require('../../service/general/jwtService')
+const queue = require('express-queue')
 
 let router = express.Router()
 let routes = function () {
@@ -14,8 +15,8 @@ let routes = function () {
 
         let order = await bookingService.getAllBooking(body)
 
-        return res.status(200).json(order);
-    });
+        return res.status(200).json(order)
+    }, queue({ activeLimit: 2, queuedLimit: -1}))
 
     /////////////////////////////////
     // API to list all the available rooms for any particular day in the future
@@ -30,8 +31,8 @@ let routes = function () {
         body.customerId = userId
 
         let booking = await bookingService.bookRoom(body)
-        return res.status(200).json(booking);
-    });
+        return res.status(200).json(booking)
+    })
 
     router.route('/')
     .put(async (req, res) => {
@@ -42,8 +43,8 @@ let routes = function () {
         body.customerId = userId
 
         let booking = await bookingService.updateBookRoom(body)
-        return res.status(200).json(booking);
-    });
+        return res.status(200).json(booking)
+    })
 
     /////////////////////////////////
     // API to cancel any booking
@@ -57,9 +58,9 @@ let routes = function () {
         body.customerId = userId
         
         let cancel = await bookingService.cancel(req.body)
-        return res.status(200).json(cancel);
-    });
+        return res.status(200).json(cancel)
+    })
 
-    return router;
-};
+    return router
+}
 module.exports = routes;

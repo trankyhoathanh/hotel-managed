@@ -1,4 +1,4 @@
-let md5 = require('md5');
+let md5 = require('md5')
 let { Customer } = require('../../connection/sequelize')
 let jwtService = require('../../service/general/jwtService')
 

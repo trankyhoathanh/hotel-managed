@@ -77,7 +77,7 @@ async function bookRoom(body) {
         // step 2 - Insert Order
         let order = await Order.create({
             customerId: body.customerId
-        }, {transaction});
+        }, {transaction})
       
         // step 3 - Insert Order Details
         let orderDetails = []
@@ -110,7 +110,7 @@ async function bookRoom(body) {
                         startDate: new Date(body.roomIds[i].date)
                     },
                     {transaction}
-                );
+                )
                 orderDetails.push(detail)
             }
         }
@@ -137,7 +137,7 @@ async function bookRoom(body) {
             }
         }
         // commit
-        await transaction.commit();
+        await transaction.commit()
 
         for(let i = 0; i < orderDetails.length; i++)
         {
@@ -284,7 +284,7 @@ async function updateBookRoom(body) {
                         startDate: new Date(body.roomIds[i].date)
                     },
                     {transaction}
-                );
+                )
                 orderDetails.push(detail)
             }
         }
@@ -302,7 +302,7 @@ async function updateBookRoom(body) {
         }
 
         // commit
-        await transaction.commit();
+        await transaction.commit()
 
 
 

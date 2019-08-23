@@ -1,5 +1,5 @@
-let express = require('express')
-let roomService = require('../../service/customer/roomService')
+const express = require('express')
+const roomService = require('../../service/customer/roomService')
 
 let router = express.Router()
 let routes = function () {
@@ -17,9 +17,9 @@ let routes = function () {
             data: rooms,
             statusCode: 200,
             message: 'Get Succeed'
-        });
-    });
+        })
+    })
 
-    return router;
-};
+    return router
+}
 module.exports = routes;

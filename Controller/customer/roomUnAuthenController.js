@@ -1,5 +1,7 @@
-let express = require('express')
-let roomService = require('../../service/customer/roomService')
+const express = require('express')
+const roomService = require('../../service/customer/roomService')
+
+const { check, validationResult } = require('express-validator')
 
 let router = express.Router()
 let routes = function () {
@@ -10,16 +12,33 @@ let routes = function () {
     // localhost:30004/customer/room/unauthen?dateFrom=2019-08-21&dateTo=2019-08-22
     // Output: data (list rooms available)
     router.route('/')
-    .get(async (req, res) => {
+    .get(
+    [
+        check('dateFrom', `Date From is not null`).not().isEmpty()
+    ],async (req, res) => {
+        // validate model
+        let errors = await validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(200).json(
+                { 
+                    data: {
+                        err: errors.array()
+                    },
+                    statusCode: 100,
+                    message: 'Validate input'
+                }
+            )
+        }
+
         let rooms = await roomService.roomsAvailable(req.query)
 
         return res.status(200).json({
             data: rooms,
             statusCode: 200,
             message: 'Get Succeed'
-        });
-    });
+        })
+    })
 
-    return router;
-};
+    return router
+}
 module.exports = routes;

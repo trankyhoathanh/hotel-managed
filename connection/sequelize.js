@@ -17,7 +17,7 @@ const sequelize = new Sequelize({
     },
     transactionType: 'IMMEDIATE',
     logging: false
-});
+})
 const Op = Sequelize.Op
 
 // Customer
@@ -26,14 +26,14 @@ const Room = RoomModel(sequelize, Sequelize)
 const Order = OrderModel(sequelize, Sequelize)
 const OrderDetail = OrderDetailModel(sequelize, Sequelize)
 
-Customer.hasMany(Order);
-Order.belongsTo(Customer);
+Customer.hasMany(Order)
+Order.belongsTo(Customer)
 
-Order.hasMany(OrderDetail);
-OrderDetail.belongsTo(Order);
+Order.hasMany(OrderDetail)
+OrderDetail.belongsTo(Order)
 
-Room.hasMany(OrderDetail);
-OrderDetail.belongsTo(Room);
+Room.hasMany(OrderDetail)
+OrderDetail.belongsTo(Room)
 
 
 // Admin
@@ -45,7 +45,7 @@ sequelize.sync({ force: false })
     console.log(`Database & tables OK`)
 })
 
-let winston = require('winston');
+let winston = require('winston')
 let optionsWinston = {
     errorFile: {
         level: 'error',
@@ -85,7 +85,7 @@ let logger = new winston.createLogger({
 
 // logger.stream = {
 //     write: function(message, encoding) {
-//       logger.info(message);
+//       logger.info(message)
 //     },
 // }
 

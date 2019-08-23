@@ -1,4 +1,4 @@
-let md5 = require('md5');
+let md5 = require('md5')
 let { Manager } = require('../../connection/sequelize')
 let jwtService = require('../../service/general/jwtService')
 
@@ -82,7 +82,9 @@ async function login(data) {
     let manager = await Manager.findOne({
         where: {
             user: data.user,
-            pass: md5(data.pass)
+            pass: md5(data.pass),
+            isActive: true,
+            isDelete: false
         }
     })
 

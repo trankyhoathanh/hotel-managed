@@ -1,5 +1,5 @@
 const fs = require('fs')
-const path = require('path');
+const path = require('path')
 const jwt = require('jsonwebtoken')
 let privateKEY = fs.readFileSync(path.resolve('config/private.key'))
 let publicKEY  = fs.readFileSync(path.resolve('config/public.key'))
@@ -42,7 +42,7 @@ async function jwtVerify(token) {
 
 // ====================   JWT DeCode ======================
 async function jwtDecode(token) {
-    return jwt.decode(token, {complete: true});
+    return jwt.decode(token, {complete: true})
 }
 
 // ====================   Get UserId ======================
