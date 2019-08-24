@@ -3,6 +3,7 @@ const app = express()
 const port = process.env.port || 30004
 const server = require("http").Server(app)
 const bodyParser = require('body-parser')
+global.dirname = __dirname;
 
 // Structure CORS
 const cors = require('cors')

@@ -1,4 +1,5 @@
-let { Room, Order, OrderDetail, Op, logger } = require('../../connection/sequelize')
+const { Room, Order, OrderDetail, Op, logger } = require('../../connection/sequelize')
+const uploadImageService = require('../general/uploadImageService')
 
 async function read() {
     let room = await Room.findAll()
@@ -10,6 +11,9 @@ async function read() {
 }
 
 async function create(data) {
+    
+    data.image = await uploadImageService.saveImageUpload(data)
+
     let room = await Room.create(data)
 
     logger.log('info',`Room CREATE`, {
