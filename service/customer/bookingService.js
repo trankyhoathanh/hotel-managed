@@ -1,5 +1,5 @@
-let { sequelize, Room, Customer, Order, OrderDetail, Op, logger } = require('../../connection/sequelize')
-let roomService = require('./roomService')
+const { sequelize, Room, Customer, Order, OrderDetail, Op, logger } = prodServiceLocator.get('dataProduction')
+const roomService = prodServiceLocator.get('roomService')
 
 async function getAllBooking(body) {
     let order = null

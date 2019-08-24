@@ -1,6 +1,6 @@
 let md5 = require('md5')
-let { Customer } = require('../../connection/sequelize')
-let jwtService = require('../../service/general/jwtService')
+const { Customer } = prodServiceLocator.get('dataProduction')
+const jwtService = prodServiceLocator.get('jwtService')
 
 async function read() {
     let customer = await Customer.findAll()

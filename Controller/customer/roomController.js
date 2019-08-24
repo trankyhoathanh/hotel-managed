@@ -1,5 +1,5 @@
 const express = require('express')
-const roomService = require('../../service/customer/roomService')
+const roomService = prodServiceLocator.get('roomService')
 
 let router = express.Router()
 let routes = function () {

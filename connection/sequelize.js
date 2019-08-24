@@ -77,17 +77,9 @@ let logger = new winston.createLogger({
         new (winston.transports.Console)(optionsWinston.console),
         new (winston.transports.File)(optionsWinston.errorFile),
         new (winston.transports.File)(optionsWinston.file)
-        // new winston.transports.File(optionsWinston.file),
-        // new winston.transports.Console(optionsWinston.console)
     ],
     exitOnError: false, // do not exit on handled exceptions
 })
-
-// logger.stream = {
-//     write: function(message, encoding) {
-//       logger.info(message)
-//     },
-// }
 
 module.exports = {
     sequelize,

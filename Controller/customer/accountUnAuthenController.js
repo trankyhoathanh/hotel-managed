@@ -1,5 +1,5 @@
 const express = require('express')
-const customerService = require('../../service/customer/accountService')
+const customerService = prodServiceLocator.get('accountService')
 const { check, validationResult } = require('express-validator')
 
 const expressQueue = require('express-queue')

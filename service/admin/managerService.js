@@ -1,6 +1,6 @@
 let md5 = require('md5')
-let { Manager } = require('../../connection/sequelize')
-let jwtService = require('../../service/general/jwtService')
+const { Manager } = prodServiceLocator.get('dataProduction')
+const jwtService = prodServiceLocator.get('jwtService')
 
 ///////////////////////////
 //  Get all Manager

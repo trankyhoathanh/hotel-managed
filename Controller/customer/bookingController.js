@@ -1,7 +1,6 @@
 const express = require('express')
-const bookingService = require('../../service/customer/bookingService')
-const jwtService = require('../../service/general/jwtService')
-const { check, validationResult } = require('express-validator')
+const bookingService = prodServiceLocator.get('bookingService')
+const jwtService = prodServiceLocator.get('jwtService')
 
 const expressQueue = require('express-queue')
 const queueMw = expressQueue({ activeLimit: 20, queuedLimit: 20 });

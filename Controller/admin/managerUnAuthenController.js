@@ -1,5 +1,6 @@
 const express = require('express')
-const managerService = require('../../service/admin/managerService')
+const managerService = prodServiceLocator.get('managerService')
+
 const { check, validationResult } = require('express-validator')
 
 let router = express.Router()

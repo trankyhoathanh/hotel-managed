@@ -1,5 +1,5 @@
 const express = require('express')
-const managerService = require('../../service/admin/managerService')
+const managerService = prodServiceLocator.get('managerService')
 
 
 let router = express.Router()

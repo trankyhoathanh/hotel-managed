@@ -1,5 +1,5 @@
-const { Room, Order, OrderDetail, Op, logger } = require('../../connection/sequelize')
-const uploadImageService = require('../general/uploadImageService')
+const { Room, Order, OrderDetail, Op, logger } = prodServiceLocator.get('dataProduction')
+const uploadImageService = prodServiceLocator.get('uploadImageService')
 
 async function read() {
     let room = await Room.findAll()

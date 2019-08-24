@@ -3,6 +3,7 @@ const app = express()
 const port = process.env.port || 30004
 const server = require("http").Server(app)
 const bodyParser = require('body-parser')
+
 global.dirname = __dirname;
 
 // Structure CORS
@@ -18,11 +19,28 @@ app.use(function (req, res, next) {
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+prodServiceLocator = require('./structure/serviceLocator')()
+
+// Register some structure hard (Database)
+prodServiceLocator.register('dataProduction',  require('./connection/sequelize'))
+
+// Dependencies general first
+prodServiceLocator.factory('jwtService',  require('./service/general/jwtService'))
+prodServiceLocator.factory('uploadImageService',  require('./service/general/uploadImageService'))
+
+// Some another services need include general service
+prodServiceLocator.factory('managerService',  require('./service/admin/managerService'))
+prodServiceLocator.factory('accountService',  require('./service/customer/accountService'))
+prodServiceLocator.factory('roomService',  require('./service/customer/roomService'))
+prodServiceLocator.factory('bookingService',  require('./service/customer/bookingService'))
+
+
+
 ////////////////////////////////////////
 //  Include Services
 //  START
-let managerService = require('./service/admin/managerService')
-let accountService = require('./service/customer/accountService')
+const managerService = prodServiceLocator.get('managerService')
+const accountService = prodServiceLocator.get('accountService')
 //
 //  END
 //  Include Services
