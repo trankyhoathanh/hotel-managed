@@ -1,0 +1,2 @@
+# example-hotel
+example-hotel
