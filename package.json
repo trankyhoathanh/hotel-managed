@@ -17,7 +17,7 @@
     "express-validator": "6.1.1",
     "is-base64": "0.1.0",
     "jsonwebtoken": "8.5.1",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "md5": "2.2.1",
     "sequelize": "5.15.1",
     "sqlite3": "4.1.0",
